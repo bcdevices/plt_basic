@@ -6,17 +6,17 @@ use Mix.Config
 
 keys =
   [
-    Path.join([System.user_home!(), ".ssh", "id_rsa.pub"]),
-    Path.join([System.user_home!(), ".ssh", "id_ecdsa.pub"]),
-    Path.join([System.user_home!(), ".ssh", "id_ed25519.pub"])
+    Path.join([File.cwd!(), "ssh_keys", "id_rsa.pub"]),
+    Path.join([File.cwd!(), "ssh_keys", "id_ecdsa.pub"]),
+    Path.join([File.cwd!(), "ssh_keys", "id_ed25519.pub"])
   ]
   |> Enum.filter(&File.exists?/1)
 
 if keys == [],
   do:
     Mix.raise("""
-    No SSH public keys found in ~/.ssh. An ssh authorized key is needed to
-    log into the Nerves device and update firmware on it using ssh.
+    No SSH public keys found in ssh_keys. An ssh authorized key is needed to
+    log into the PLT using ssh.
     See your project's config.exs for this error message.
     """)
 
